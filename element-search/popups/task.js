@@ -9,9 +9,12 @@ for (let i = 0; i < modalClose.length; i++) {
     modalClose[i].onclick = function() {
         if (modalClose[i].classList.contains("show-success")) {
             showSuccess.classList.add("modal_active");
-        } else {
             modalMain.classList.remove("modal_active");
-            showSuccess.classList.remove("modal_active");
+        } else {
+            // modalMain.classList.remove("modal_active");
+            // showSuccess.classList.remove("modal_active");
+            
+            modalClose[i].closest(".modal_active").classList.remove("modal_active");
         }
     }
 }
