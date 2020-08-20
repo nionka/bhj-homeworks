@@ -1,24 +1,40 @@
 const input = document.getElementById("task__input");
 const tasksList = document.getElementById("tasks__list");
+const btnAdd = document.getElementById("tasks__add");
 
-input.addEventListener("keydown", (e) => {
-    
-    if (e.key === "Enter" && e.target.value != "") {
-        event.preventDefault();
-
-         let newTask = `<div class="task">
+function makeTask(input) {
+    let newTask = `<div class="task">
                             <div class="task__title">
-                                ${e.target.value}
+                                ${input.value}
                             </div>
                             <a href="#" class="task__remove">&times;</a>
                         </div>`;
 
-        tasksList.insertAdjacentHTML("beforeend", newTask);
+    tasksList.insertAdjacentHTML("beforeend", newTask);
 
-        tasksList.lastElementChild.querySelector(".task__remove").addEventListener("click", (e) => {
-            e.target.closest(".task").remove();
-        })
+    tasksList.lastElementChild.querySelector(".task__remove").addEventListener("click", (e) => {
+        e.target.closest(".task").remove();
+    })
 
-        e.target.value = "";    
+    input.value = ""; 
+}
+
+function check(input) {
+    if (input.value != "") {
+        makeTask(input);
+    } else {
+        alert("Заполните поле!");
+    }
+}
+
+btnAdd.addEventListener("click", () => {
+    event.preventDefault();
+    check(input);
+})
+
+input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        event.preventDefault();
+        check(input);     
     }
 })
